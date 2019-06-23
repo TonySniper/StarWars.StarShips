@@ -15,6 +15,8 @@ namespace TechTest.Antonio
         {
             int distance = GetDistanceFromUserInput();
 
+            Console.WriteLine("Fetching data, please wait...");
+
             var url = ConfigurationManager.AppSettings.Get("StarWarsApiUrl");
 
             using (var apiClient = new ApiClient(url))
@@ -44,8 +46,11 @@ namespace TechTest.Antonio
 
             while (!isValidInput)
             {
-                Console.WriteLine("Please input a valid distance (numbers only)");
-                isValidInput = int.TryParse(Console.ReadLine(), out result);                
+                Console.WriteLine("Please input a valid distance (positive numbers only)");
+                isValidInput = int.TryParse(Console.ReadLine(), out result);
+
+                if (result <= 0)
+                    isValidInput = false;
             }
 
             return result;
