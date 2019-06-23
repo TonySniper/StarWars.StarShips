@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TechTest.Antonio.UnitTests.Map
+namespace TechTest.Antonio.UnitTests
 {
     [TestClass]
     public class WhenCalculatingNumberOfStopsForARessuplyForAStarShip
@@ -48,7 +48,31 @@ namespace TechTest.Antonio.UnitTests.Map
         [TestMethod]
         public void ItShouldReturnNullForAShipWithUknownConsumables()
         {
-            var ship = new StarShip("ship ship", 10, 10, TimeMeasure.Unknown);
+            var ship = new StarShip("ship ship", 10, null, TimeMeasure.Week);
+
+            int distance = 1;
+
+            var numberOfStops = ship.GetNumberOfStopsRequired(distance);
+
+            Assert.IsNull(numberOfStops);
+        }
+
+        [TestMethod]
+        public void ItShouldReturnNullForAShipWithUknownMegalights()
+        {
+            var ship = new StarShip("ship ship", null, 10, TimeMeasure.Month);
+
+            int distance = 1;
+
+            var numberOfStops = ship.GetNumberOfStopsRequired(distance);
+
+            Assert.IsNull(numberOfStops);
+        }
+
+        [TestMethod]
+        public void ItShouldReturnNullForAShipWithUknownTimeMeasure()
+        {
+            var ship = new StarShip("ship ship", 20, 10, TimeMeasure.Unknown);
 
             int distance = 1;
 

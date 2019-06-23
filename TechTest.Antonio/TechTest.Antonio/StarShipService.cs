@@ -22,11 +22,11 @@ namespace TechTest.Antonio
             this.mapper = mapper;
         }
 
-        public IEnumerable<StarShipViewModel> GetNumberOfStopsForStarShips(int distance)
+        public async Task<IEnumerable<StarShipViewModel>> GetNumberOfStopsForStarShips(int distance)
         {
-            var responseDtoList = this.GetStarShipsFromApi().Result;
+            var responseDtoList = await this.GetStarShipsFromApi();
             IList<StarShipViewModel> shipList = new List<StarShipViewModel>();
-
+            
             foreach (var item in responseDtoList.SelectMany(x => x.StarShips))
             {
                 var shipEntity = this.mapper.Map(item);

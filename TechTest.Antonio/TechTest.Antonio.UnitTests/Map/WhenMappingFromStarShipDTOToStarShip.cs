@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TechTest.Antonio.DTO;
 using TechTest.Antonio.Transformation;
 
-namespace TechTest.Antonio.UnitTests.Map
+namespace TechTest.Antonio.UnitTests
 {
     [TestClass]
     public class WhenMappingFromStarShipDTOToStarShip

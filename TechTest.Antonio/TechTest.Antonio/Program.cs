@@ -25,7 +25,7 @@ namespace TechTest.Antonio
 
                 var service = new StarShipService(apiClient, deserializer, mapper);
 
-                var result = service.GetNumberOfStopsForStarShips(distance);
+                var result = Task.Run(() => service.GetNumberOfStopsForStarShips(distance)).Result;
 
                 foreach (var item in result.OrderBy(x => x.ShipName))
                 {
