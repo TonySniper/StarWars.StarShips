@@ -24,7 +24,7 @@ namespace TechTest.Antonio.Transformation
 
         private int? GetMegaliths(StarShipDTO dto)
         {
-            if (string.Equals(dto.MegalightsPerHour, unknownValue))
+            if (!this.IsStarShipValidForCalculations(dto))
                 return null;
 
             var megalights = int.Parse(dto.MegalightsPerHour);
@@ -34,7 +34,7 @@ namespace TechTest.Antonio.Transformation
 
         private int? GetConsumables(StarShipDTO dto)
         {
-            if (string.Equals(dto.Consumables.ToLower(), unknownValue) || !dto.Consumables.Any(char.IsDigit))
+            if (!this.IsStarShipValidForCalculations(dto))
                 return null;
 
             var consumables = string.Join("", dto.Consumables.Where(char.IsDigit));
@@ -49,7 +49,7 @@ namespace TechTest.Antonio.Transformation
             string month = "month";
             string year = "year";
 
-            if (string.Equals(dto.Consumables.ToLower(), unknownValue) || string.Equals(dto.MegalightsPerHour, unknownValue))
+            if (!this.IsStarShipValidForCalculations(dto))
                 return TimeMeasure.Unknown;
 
             var timeMeasure = string.Join("", dto.Consumables.Where(char.IsLetter)).ToLower();
@@ -67,6 +67,13 @@ namespace TechTest.Antonio.Transformation
                 return TimeMeasure.Year;
 
             throw new Exception(string.Format("Invalid time measure: {0}", timeMeasure));
+        }
+
+        private bool IsStarShipValidForCalculations(StarShipDTO dto)
+        {
+            if (string.Equals(dto.Consumables.ToLower(), unknownValue) || string.Equals(dto.MegalightsPerHour, unknownValue) || !dto.Consumables.Any(char.IsDigit))
+                return false;
+            return true;
         }
     }
 }

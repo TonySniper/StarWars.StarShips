@@ -77,5 +77,17 @@ namespace TechTest.Antonio.AcceptanceTests.Service
             Assert.AreEqual(shipName.ToLower(), ship.ShipName.ToLower());
             Assert.AreEqual(expectedStops.ToLower(), ship.NumberOfStopsRequired.ToLower());
         }
+
+        [TestMethod]
+        public async Task ItShouldReturn37StarShips()
+        {
+            int distance = 1000000;
+
+            var shipCount = (await this.service.GetNumberOfStopsForStarShips(distance)).Count();
+
+            int expectedCount = 37;
+
+            Assert.AreEqual(expectedCount, shipCount);
+        }
     }
 }

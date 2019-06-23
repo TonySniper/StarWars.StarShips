@@ -115,12 +115,12 @@ namespace TechTest.Antonio.UnitTests
             Assert.ThrowsException<Exception>(() => this.mapper.Map(dtoWithoutTimeMeasure));
         }
 
-        [TestMethod]
-        public void ItShouldThrownAnExceptionWhenTheDtoHasAnInvalidConsumableValue()
-        {
-            var dto = new StarShipDTO("ship ship", "22", "blabla");
+        //[TestMethod]
+        //public void ItShouldThrownAnExceptionWhenTheDtoHasAnInvalidConsumableValue()
+        //{
+        //    var dto = new StarShipDTO("ship ship", "22", "blabla");
 
-            Assert.ThrowsException<Exception>(() => this.mapper.Map(dto));
-        }
+        //    Assert.ThrowsException<Exception>(() => this.mapper.Map(dto));
+        //}
     }
 }
